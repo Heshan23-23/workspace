@@ -39,6 +39,17 @@ document.addEventListener('DOMContentLoaded',()=>{
       }
     });
   });
+
+  // Mobile navbar toggle
+  const navHeader = document.querySelector('.nav');
+  const navToggle = document.querySelector('.nav-toggle');
+  if(navHeader && navToggle){
+    navToggle.addEventListener('click',()=>{
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      navHeader.classList.toggle('open');
+    });
+  }
   
   // Simple carousel initializer for index thumbnails (if present)
   const carousels = document.querySelectorAll('.carousel');
