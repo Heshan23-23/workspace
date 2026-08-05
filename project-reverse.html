@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reverse Engineering of a Foot Air Pump — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>Reverse Engineering of a Foot Air Pump</h1>
+
+    <div class="carousel" id="carousel-reverse">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image-reverse" src="assets/Picture1.png" alt="Foot air pump image">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs-reverse">
+      <img data-src="assets/Picture1.png" src="assets/Picture1.png" alt="pic1" class="active">
+      <img data-src="assets/Picture2.jpg" src="assets/Picture2.jpg" alt="pic2">
+      <img data-src="assets/Picture3.png" src="assets/Picture3.png" alt="pic3">
+      <img data-src="assets/Picture4.png" src="assets/Picture4.png" alt="pic4">
+      <img data-src="assets/Picture5.png" src="assets/Picture5.png" alt="pic5">
+      <img data-src="assets/Picture6.jpg" src="assets/Picture6.jpg" alt="pic6">
+      <img data-src="assets/Picture7.png" src="assets/Picture7.png" alt="pic7">
+      <img data-src="assets/Picture8.png" src="assets/Picture8.png" alt="pic8">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Overview</h2>
+      <p>Conducted as a Semester 4 Manufacturing Engineering project at the University of Moratuwa, this project involved the complete disassembly and reverse engineering of a mechanical foot air pump to deeply analyze its structural geometry, material composition, and manufacturing methodologies.</p>
+
+      <h3>Material Analysis &amp; Metrology</h3>
+      <p>To accurately reconstruct the components, our team utilized precision engineering measuring instruments—including Vernier calipers, screw pitch gauges, and thickness gauges—to capture highly accurate dimensions, tolerances, and thread pitches. We then conducted comprehensive physical and chemical tests, such as FTIR, Rockwell Hardness, Density, and Spark testing. This rigorous testing allowed us to identify the exact materials used, such as HDPE for the piston lid, Low Carbon Steel for the rod, Zamak 3 for the hose fitting, and Polyurethane with a CaCO3 filler for the air hose.</p>
+
+      <h3>Manufacturing Feasibility &amp; CAD Modeling</h3>
+      <p>Based on our precise physical measurements, we developed detailed 3D CAD models and production drawings for each component, mapping out mechanical fits and tolerances. We also evaluated the mass-production viability of the original parts, confirming the use of manufacturing techniques like injection molding, thread rolling, pressure die casting, extrusion, sheet metal blanking, and deep drawing.</p>
+
+      <h3>Design Optimization</h3>
+      <p>Going beyond pure analysis, we proposed practical design upgrades to improve the pump's performance, durability, and manufacturability. Key recommendations included standardizing the piston thread profile to M5 or M6, upgrading the hose braiding from Nylon to weather-resistant PET, and integrating cooling fins onto the exterior surface of the cylinder barrel for better heat dissipation.</p>
+
+      <h3>Outcome</h3>
+      <p>This comprehensive analysis provided a deep dive into the practical realities of mechanical design. It bridged the gap between theoretical knowledge and real-world application in precision metrology, material selection, and mass production planning.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const images = ['assets/Picture1.png','assets/Picture2.jpg','assets/Picture3.png','assets/Picture4.png','assets/Picture5.png','assets/Picture6.jpg','assets/Picture7.png','assets/Picture8.png'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image-reverse');
+      const prev = document.querySelector('#carousel-reverse .prev');
+      const next = document.querySelector('#carousel-reverse .next');
+      const thumbs = document.getElementById('thumbs-reverse');
+      function show(i){ idx = (i + images.length) % images.length; imgEl.src = images[idx]; thumbs.querySelectorAll('img').forEach((t,ti)=>{ t.classList.toggle('active', ti===idx); }); }
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      thumbs.addEventListener('click',e=>{ const t = e.target.closest('img'); if(!t) return; const children = Array.from(thumbs.querySelectorAll('img')); show(children.indexOf(t)); });
+      document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') show(idx+1); if(e.key==='ArrowLeft') show(idx-1); });
+    })();
+  </script>
+</body>
+</html>

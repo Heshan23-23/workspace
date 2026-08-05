@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LockerLink: The Autonomous Last-Mile AIoT Node — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>LockerLink: The Autonomous Last-Mile AIoT Node</h1>
+
+    <div class="carousel" id="carousel-lockerlink">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image-lockerlink" src="assets/4_1.jpeg" alt="LockerLink image">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs-lockerlink">
+      <img data-src="assets/4_1.jpeg" src="assets/4_1.jpeg" alt="pic1" class="active">
+      <img data-src="assets/4_2.jpeg" src="assets/4_2.jpeg" alt="pic2">
+      <img data-src="assets/4_3.jpg" src="assets/4_3.jpg" alt="pic3">
+      <img data-src="assets/4_4.jpg" src="assets/4_4.jpg" alt="pic4">
+      <img data-src="assets/4_5.jpeg" src="assets/4_5.jpeg" alt="pic5">
+      <img data-src="assets/4_6.png" src="assets/4_6.png" alt="pic6">
+      <img data-src="assets/4_7.png" src="assets/4_7.png" alt="pic7">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Overview</h2>
+      <p>Recognized as a semifinalist project in the SLIOT Challenge 2026, LockerLink was engineered to resolve the inefficiencies and carbon footprint associated with the "redelivery loop" in urban logistics. It functions as a retrofittable, highly secure smart parcel box that acts as an unmanned receptionist for residential deliveries, bridging a digital IoT concept with robust physical mechanics.</p>
+
+      <h3>Mechanical Design &amp; Kinematics</h3>
+      <p>Unlike passive delivery boxes, LockerLink features a complex multi-order trap-door mechanism that allows multiple couriers to deposit packages securely throughout the day without ever gaining access to previously delivered items. The complete mechanical architecture was conceptualized and drafted using SolidWorks to ensure precise tolerances. The system's kinematics utilize heavy-duty Nema 17 and 28BYJ-48 stepper motors, incorporating lead screw and rack-and-pinion mechanisms to translate rotational motion into the high-torque linear movements required for the trap-door security.</p>
+
+      <h3>Sensor Integration &amp; Embedded Control</h3>
+      <p>The system is governed by a distributed architecture powered by an Arduino Uno and ESP32. To map the real-time physical state of the doors and package bays, strategically mounted IR sensors, ultrasonic sensors, and limit switches create a robust feedback loop. This embedded hardware syncs seamlessly with a dedicated mobile app, utilizing a dynamic One-Time Password (OTP) system to grant authorized access to couriers while giving the user complete remote visibility.</p>
+
+      <h3>Environmental &amp; Power Management</h3>
+      <p>To protect sensitive or perishable deliveries, LockerLink actively regulates its internal temperature using a DHT11 sensor paired with a 12V DC cooling fan. A 12V/5A SMPS manages the power distribution, ensuring reliable, continuous power across all motors, sensors, and wireless communication modules.</p>
+
+      <h3>Outcome</h3>
+      <p>Taking this ambitious project from a SolidWorks concept to a resilient, moving prototype was a rigorous exercise in seamless electromechanical integration. It provided deep practical experience in kinematic planning, 3D CAD modeling, and flawlessly executing digital software logic through complex physical hardware.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const images = ['assets/4_1.jpeg','assets/4_2.jpeg','assets/4_3.jpg','assets/4_4.jpg','assets/4_5.jpeg','assets/4_6.png','assets/4_7.png'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image-lockerlink');
+      const prev = document.querySelector('#carousel-lockerlink .prev');
+      const next = document.querySelector('#carousel-lockerlink .next');
+      const thumbs = document.getElementById('thumbs-lockerlink');
+      function show(i){ idx = (i + images.length) % images.length; imgEl.src = images[idx]; thumbs.querySelectorAll('img').forEach((t,ti)=>{ t.classList.toggle('active', ti===idx); }); }
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      thumbs.addEventListener('click',e=>{ const t = e.target.closest('img'); if(!t) return; const children = Array.from(thumbs.querySelectorAll('img')); show(children.indexOf(t)); });
+      document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') show(idx+1); if(e.key==='ArrowLeft') show(idx-1); });
+    })();
+  </script>
+</body>
+</html>

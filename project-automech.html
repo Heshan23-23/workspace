@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutoMech Master — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center;flex-wrap:wrap}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>AutoMech Master</h1>
+
+    <div class="carousel" id="carousel">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image" src="assets/7-1.jpeg" alt="AutoMech Master interface preview">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs">
+      <img data-src="assets/7-1.jpeg" src="assets/7-1.jpeg" alt="AutoMech Master preview 1" class="active">
+      <img data-src="assets/7-2.jpeg" src="assets/7-2.jpeg" alt="AutoMech Master preview 2">
+      <img data-src="assets/7-3.jpeg" src="assets/7-3.jpeg" alt="AutoMech Master preview 3">
+      <img data-src="assets/7-4.jpeg" src="assets/7-4.jpeg" alt="AutoMech Master preview 4">
+      <img data-src="assets/7-5.jpeg" src="assets/7-5.jpeg" alt="AutoMech Master preview 5">
+      <img data-src="assets/7-6.jpeg" src="assets/7-6.jpeg" alt="AutoMech Master preview 6">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Description</h2>
+      <p><strong>Overview</strong><br>Developed as a personal project to expand my software development skill set, AutoMech Master is an interactive Android mobile application that serves as a comprehensive automotive engineering guide. It was created as a practical sandbox to experiment with modern mobile development tools and premium UI/UX design principles.</p>
+
+      <p><strong>Technologies &amp; Architecture</strong><br>The application was built from the ground up utilizing Kotlin and Jetpack Compose. This modern tech stack allowed for the creation of a fully declarative and highly responsive user interface that scales seamlessly across different Android devices.</p>
+
+      <p><strong>Animation &amp; Interactivity</strong><br>To elevate the user experience, the application features a vibrant interface focused on fluid, high-quality transitions. The UI implements complex visual mechanics, including immersive parallax zoom effects, staggered element entrances, and custom spring physics for smooth, natural interactions.</p>
+
+      <p><strong>Outcome</strong><br>This project successfully merged a passion for automotive engineering with advanced mobile software development. It resulted in a polished, open-source application that demonstrates a strong proficiency in modern Android app architecture and dynamic front-end design.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const images = ['assets/7-1.jpeg','assets/7-2.jpeg','assets/7-3.jpeg','assets/7-4.jpeg','assets/7-5.jpeg','assets/7-6.jpeg'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image');
+      const prev = document.querySelector('.carousel .prev');
+      const next = document.querySelector('.carousel .next');
+      const thumbs = document.getElementById('thumbs');
+
+      function show(i){
+        idx = (i + images.length) % images.length;
+        imgEl.src = images[idx];
+        thumbs.querySelectorAll('img').forEach((t, ti)=>{
+          t.classList.toggle('active', ti === idx);
+        });
+      }
+
+      prev.addEventListener('click', ()=> show(idx - 1));
+      next.addEventListener('click', ()=> show(idx + 1));
+      thumbs.addEventListener('click', e=>{
+        const t = e.target.closest('img');
+        if(!t) return;
+        const children = Array.from(thumbs.querySelectorAll('img'));
+        show(children.indexOf(t));
+      });
+      document.addEventListener('keydown', e=>{
+        if(e.key === 'ArrowRight') show(idx + 1);
+        if(e.key === 'ArrowLeft') show(idx - 1);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Optimizing Production Lines at New Vithanakande Tea Factory — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center;flex-wrap:wrap}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>Optimizing Production Lines at New Vithanakande Tea Factory</h1>
+
+    <div class="carousel" id="carousel-tea">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image-tea" src="assets/5-1.jpeg" alt="Tea factory project image">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs-tea">
+      <img data-src="assets/5-1.jpeg" src="assets/5-1.jpeg" alt="pic1" class="active">
+      <img data-src="assets/5-2.jpeg" src="assets/5-2.jpeg" alt="pic2">
+      <img data-src="assets/5-3.jpeg" src="assets/5-3.jpeg" alt="pic3">
+      <img data-src="assets/5-4.jpeg" src="assets/5-4.jpeg" alt="pic4">
+      <img data-src="assets/5-5.jpeg" src="assets/5-5.jpeg" alt="pic5">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Overview</h2>
+      <p>Currently underway as part of the ME3043 Production and Operations Management module, this ongoing project focuses on analyzing and improving the manufacturing processes at the New Vithanakande Tea Factory (Pvt) Ltd. Located near the Sinharaja Rainforest in Sri Lanka, this renowned facility supports over 6,000 local smallholder farmers and processes approximately 20,000 kilograms of fresh tea leaves daily into premium low-grown orthodox Ceylon black tea.</p>
+
+      <h3>The Challenge</h3>
+      <p>The factory management highlighted two primary operational challenges: the rising cost of rubber firewood and a shortage of available workers. Our team is targeting specific inefficiencies across three main production areas:</p>
+      <ul>
+        <li><strong>Boiler &amp; Fuel Management:</strong> Operational waste driven by poor facility layout and substandard wood storage.</li>
+        <li><strong>Fermentation Process:</strong> Inefficiencies stemming from manual humidity regulation and the labor-intensive transfer of rolled leaves, which is difficult to fully automate due to existing layout constraints.</li>
+        <li><strong>Withering Process:</strong> Challenges include manual hot airflow control, uneven withering, and labor-heavy loading onto conveyors.</li>
+      </ul>
+
+      <h3>Project Objectives</h3>
+      <p>The primary aim of this project is to optimize manufacturing operations and reduce overall production costs by developing labor-saving and energy-efficient solutions. To achieve this, our team is working to:</p>
+      <ul>
+        <li>Assess current factory processes to pinpoint the root causes of high firewood consumption, labor reliance, and quality inconsistencies.</li>
+        <li>Explore improved facility layouts, semi-automated controls, and better material handling methods.</li>
+        <li>Propose practical operational upgrades for fuel storage, automated environmental controls, and material transfer to boost factory efficiency.</li>
+      </ul>
+
+      <h3>Ongoing Methodology</h3>
+      <p>As the project progresses through its timeline, we are actively conducting detailed data collection on the factory floor. We will be utilizing virtual plant simulation software to model the facility and rigorously evaluate the feasibility, implementation costs, and projected energy savings of our proposed engineering solutions.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const images = ['assets/5-1.jpeg','assets/5-2.jpeg','assets/5-3.jpeg','assets/5-4.jpeg','assets/5-5.jpeg'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image-tea');
+      const prev = document.querySelector('#carousel-tea .prev');
+      const next = document.querySelector('#carousel-tea .next');
+      const thumbs = document.getElementById('thumbs-tea');
+      function show(i){ idx = (i + images.length) % images.length; imgEl.src = images[idx]; thumbs.querySelectorAll('img').forEach((t,ti)=>{ t.classList.toggle('active', ti===idx); }); }
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      thumbs.addEventListener('click',e=>{ const t = e.target.closest('img'); if(!t) return; const children = Array.from(thumbs.querySelectorAll('img')); show(children.indexOf(t)); });
+      document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') show(idx+1); if(e.key==='ArrowLeft') show(idx-1); });
+    })();
+  </script>
+</body>
+</html>

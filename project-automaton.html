@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Automaton Butterfly — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>The Automaton Butterfly</h1>
+
+    <div class="carousel" id="carousel">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image" src="assets/1st_1.jpg" alt="Automaton Butterfly image">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs">
+      <img data-src="assets/1st_1.jpg" src="assets/1st_1.jpg" alt="thumb1" class="active">
+      <img data-src="assets/1st_2.jpg" src="assets/1st_2.jpg" alt="thumb2">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Description</h2>
+      <p>Developed as a Semester 2 manufacturing project at the Department of Mechanical Engineering (DoME), University of Moratuwa, The Automaton Butterfly is a kinetic mechanical sculpture that blends artistic design with foundational engineering principles.</p>
+
+      <h3>The Mechanism</h3>
+      <p>The butterfly comes to life through a manually operated handle connected to a precision-engineered cam and follower mechanism. As the handle is turned, the mechanism smoothly translates rotary motion into the gentle, rhythmic flapping of the wings.</p>
+
+      <h3>Fabrication &amp; Techniques</h3>
+      <p>Moving from the planning phase to the final build required extensive hands-on fabrication and teamwork. To construct the various components of the automaton, our team utilized a wide range of core manufacturing processes, including:</p>
+      <ul>
+        <li>Sheet metal forming</li>
+        <li>Metal lathe machining</li>
+        <li>Woodworking</li>
+        <li>Welding</li>
+        <li>Forging</li>
+      </ul>
+
+      <h3>Outcome</h3>
+      <p>This project served as a bridge between theoretical mechanics and real-world fabrication. It provided invaluable experience in precision machining, overcoming physical assembly challenges, and successfully integrating mechanical motion into an artistic final product.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    // Simple carousel
+    (function(){
+      const images = ['assets/1st_1.jpg','assets/1st_2.jpg'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image');
+      const prev = document.querySelector('.carousel .prev');
+      const next = document.querySelector('.carousel .next');
+      const thumbs = document.getElementById('thumbs');
+
+      function show(i){
+        idx = (i + images.length) % images.length;
+        imgEl.src = images[idx];
+        // update thumbs
+        thumbs.querySelectorAll('img').forEach((t,ti)=>{
+          t.classList.toggle('active', ti===idx);
+        });
+      }
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      thumbs.addEventListener('click',e=>{
+        const t = e.target.closest('img'); if(!t) return;
+        const children = Array.from(thumbs.querySelectorAll('img'));
+        show(children.indexOf(t));
+      });
+      document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowRight') show(idx+1);
+        if(e.key==='ArrowLeft') show(idx-1);
+      });
+    })();
+  </script>
+</body>
+</html>

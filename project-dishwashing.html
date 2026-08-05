@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Automatic Dish Washing System — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>Automatic Dish Washing System</h1>
+
+    <div class="carousel" id="carousel-dish">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image-dish" src="assets/2_3.jpg" alt="Dish washing system image">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs-dish">
+      <img data-src="assets/2_3.jpg" src="assets/2_3.jpg" alt="thumb1" class="active">
+      <img data-src="assets/2_4.jpg" src="assets/2_4.jpg" alt="thumb2">
+      <img data-src="assets/2_1.jpg" src="assets/2_1.jpg" alt="thumb3">
+      <img data-src="assets/2_2.jpg" src="assets/2_2.jpg" alt="thumb4">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Overview</h2>
+      <p>Developed as a 10-member collaborative project for the Semester 2 Fundamentals of Mechatronics module, the Automatic Dish Washing System is a fully automated, intelligent cleaning solution that seamlessly integrates mechanical engineering, electronics, and IoT technology.</p>
+
+      <h3>Core Mechanical System</h3>
+      <p>The system is built around a square-shaped conveyor belt driven by NEMA 17 motors. It features an automated queuing stage equipped with a Load Cell sensor that continuously measures the weight of the dish stack. Once the weight exceeds the pre-set limit, a Servo Motor acts as a pusher to smoothly transfer the stack onto the main conveyor. Throughout the process, ultrasonic sensors ensure precise sequential execution by pausing the belts as the stack approaches the next section.</p>
+
+      <h3>Washing Mechanism</h3>
+      <p>When the dishes enter the washing compartment, the conveyor halts and the automated cleaning cycle begins. A 12V Diaphragm Pump and Nozzle system deliver the water spray. To ensure superior cleaning coverage, the entire spray mechanism is mounted to a Lead Screw, which precisely controls the forward and backward motion of the nozzles over the dishes.</p>
+
+      <h3>Control System &amp; IoT Integration</h3>
+      <p>The system's brain relies on a multi-microcontroller architecture. An Arduino Uno and Arduino Mega handle the dedicated hardware control, while an ESP32 drives the wireless and IoT functionality. This setup communicates with a custom mobile application that offers dual operation modes: Automatic and Manual. The IoT system enables real-time monitoring and cloud sync.</p>
+
+      <h3>Outcome</h3>
+      <p>This project was a deep dive into integrated system design. It provided extensive hands-on experience in combining sensor networks, mechanical actuation, and wireless control into a cohesive, functional mechatronics product.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const images = ['assets/2_3.jpg','assets/2_4.jpg','assets/2_1.jpg','assets/2_2.jpg'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image-dish');
+      const prev = document.querySelector('#carousel-dish .prev');
+      const next = document.querySelector('#carousel-dish .next');
+      const thumbs = document.getElementById('thumbs-dish');
+      function show(i){ idx = (i + images.length) % images.length; imgEl.src = images[idx]; thumbs.querySelectorAll('img').forEach((t,ti)=>{ t.classList.toggle('active', ti===idx); }); }
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      thumbs.addEventListener('click',e=>{ const t = e.target.closest('img'); if(!t) return; const children = Array.from(thumbs.querySelectorAll('img')); show(children.indexOf(t)); });
+      document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') show(idx+1); if(e.key==='ArrowLeft') show(idx-1); });
+    })();
+  </script>
+</body>
+</html>

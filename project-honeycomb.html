@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Pedal-Powered Cardboard Honeycomb Machine — Project</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-hero{max-width:1000px;margin:28px auto;padding:20px}
+    .carousel{position:relative;display:flex;align-items:center;justify-content:center;height:500px;background:#000;border-radius:10px;overflow:hidden}
+    .carousel img{display:block;height:500px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:10px}
+    .carousel button.prev,.carousel button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:#fff;font-size:30px;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .carousel button.prev{left:12px}
+    .carousel button.next{right:12px}
+    .thumbs{display:flex;gap:8px;justify-content:center;margin-top:12px;align-items:center}
+    .thumbs img{display:block;height:80px;width:auto;max-width:100%;object-fit:contain;background:#000;border-radius:6px;cursor:pointer;opacity:0.8}
+    .thumbs img.active{outline:3px solid var(--accent);opacity:1}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">My<span>Site</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#details">Details</a>
+    </nav>
+  </header>
+
+  <main class="project-hero">
+    <h1>The Pedal-Powered Cardboard Honeycomb Machine</h1>
+
+    <div class="carousel" id="carousel-honeycomb">
+      <button class="prev" aria-label="Previous">‹</button>
+      <img id="carousel-image-honeycomb" src="assets/6-1.png" alt="Honeycomb machine image">
+      <button class="next" aria-label="Next">›</button>
+    </div>
+
+    <div class="thumbs" id="thumbs-honeycomb">
+      <img data-src="assets/6-1.png" src="assets/6-1.png" alt="pic1" class="active">
+      <img data-src="assets/6-2.png" src="assets/6-2.png" alt="pic2">
+    </div>
+
+    <section id="details" class="panel">
+      <h2>Overview</h2>
+      <p>Currently underway as part of the Semester 5 ME3201 Machine Design Project, this ongoing endeavor focuses on developing a sustainable, human-powered alternative to industrial honeycomb paper machines. The design centers around integrating a custom mechanical gearbox into a pedal-powered architecture to make eco-friendly packaging production accessible and affordable.</p>
+
+      <h3>The Challenge</h3>
+      <p>The global e-commerce boom has resulted in a 30% increase in plastic packaging waste. While honeycomb paper crafted from waste corrugated cardboard is an excellent, shock-absorbing sustainable alternative, the industrial electric machines required to manufacture it are massive and highly expensive, costing between $2,000 and $4,500. This high capital expenditure prevents small businesses and eco-startups from adopting the technology. Furthermore, a simple human-powered design is unviable because average human leg output (around 80Nm) is completely insufficient to crush and shear 3-ply corrugated cardboard, leading to immediate mechanical stall-out.</p>
+
+      <h3>Mechanical Design &amp; Gearbox Integration</h3>
+      <p>To eliminate this torque limitation, the project utilizes a custom sliding mesh gearbox. This mechanical transmission allows a human operator to maintain a comfortable, consistent pedaling cadence of 60 RPM, generating between 100 and 150 Watts of power. The gearbox actively trades rotational speed for a massive increase in shearing force, preventing the system from stalling under a heavy load.</p>
+
+      <h3>System Parameters &amp; Kinematics</h3>
+      <p>The machine's sliding mesh gearbox features dual-direction rotation with three forward gears and one reverse gear, specifically mapped to adapt the mechanical advantage for varying board thicknesses:</p>
+      <ul>
+        <li><strong>1st Gear (15 RPM target speed):</strong> Provides maximum crushing power to process very thick, triple-wall appliance boxes.</li>
+        <li><strong>2nd Gear (25 RPM target speed):</strong> Delivers a balanced mix of speed and power suited for processing standard corrugated shipping boxes.</li>
+        <li><strong>3rd Gear (60 RPM target speed):</strong> Functions as a 1:1 direct drive for the high-speed processing of lightweight materials and thin Kraft paper where torque multiplication is unnecessary.</li>
+        <li><strong>Reverse Gear:</strong> Designed to output torque greater than the 3rd forward gear, which is critical for executing custom "half-cuts," safely ripping out wedged cardboard to clear severe jams, and performing routine maintenance without dismantling the unit.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p><a class="back-button" href="index.html">← Back to projects</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const images = ['assets/6-1.png','assets/6-2.png'];
+      let idx = 0;
+      const imgEl = document.getElementById('carousel-image-honeycomb');
+      const prev = document.querySelector('#carousel-honeycomb .prev');
+      const next = document.querySelector('#carousel-honeycomb .next');
+      const thumbs = document.getElementById('thumbs-honeycomb');
+      function show(i){ idx = (i + images.length) % images.length; imgEl.src = images[idx]; thumbs.querySelectorAll('img').forEach((t,ti)=>{ t.classList.toggle('active', ti===idx); }); }
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      thumbs.addEventListener('click',e=>{ const t = e.target.closest('img'); if(!t) return; const children = Array.from(thumbs.querySelectorAll('img')); show(children.indexOf(t)); });
+      document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') show(idx+1); if(e.key==='ArrowLeft') show(idx-1); });
+    })();
+  </script>
+</body>
+</html>
