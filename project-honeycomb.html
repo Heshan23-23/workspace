@@ -44,21 +44,31 @@
     <section id="details" class="panel">
       <h2>Overview</h2>
       <p>Currently underway as part of the Semester 5 ME3201 Machine Design Project, this ongoing endeavor focuses on developing a sustainable, human-powered alternative to industrial honeycomb paper machines. The design centers around integrating a custom mechanical gearbox into a pedal-powered architecture to make eco-friendly packaging production accessible and affordable.</p>
+      <br>
 
       <h3>The Challenge</h3>
       <p>The global e-commerce boom has resulted in a 30% increase in plastic packaging waste. While honeycomb paper crafted from waste corrugated cardboard is an excellent, shock-absorbing sustainable alternative, the industrial electric machines required to manufacture it are massive and highly expensive, costing between $2,000 and $4,500. This high capital expenditure prevents small businesses and eco-startups from adopting the technology. Furthermore, a simple human-powered design is unviable because average human leg output (around 80Nm) is completely insufficient to crush and shear 3-ply corrugated cardboard, leading to immediate mechanical stall-out.</p>
+      <br>
 
       <h3>Mechanical Design &amp; Gearbox Integration</h3>
       <p>To eliminate this torque limitation, the project utilizes a custom sliding mesh gearbox. This mechanical transmission allows a human operator to maintain a comfortable, consistent pedaling cadence of 60 RPM, generating between 100 and 150 Watts of power. The gearbox actively trades rotational speed for a massive increase in shearing force, preventing the system from stalling under a heavy load.</p>
+      <br>
 
       <h3>System Parameters &amp; Kinematics</h3>
       <p>The machine's sliding mesh gearbox features dual-direction rotation with three forward gears and one reverse gear, specifically mapped to adapt the mechanical advantage for varying board thicknesses:</p>
+      <br>
+
       <ul>
         <li><strong>1st Gear (15 RPM target speed):</strong> Provides maximum crushing power to process very thick, triple-wall appliance boxes.</li>
         <li><strong>2nd Gear (25 RPM target speed):</strong> Delivers a balanced mix of speed and power suited for processing standard corrugated shipping boxes.</li>
         <li><strong>3rd Gear (60 RPM target speed):</strong> Functions as a 1:1 direct drive for the high-speed processing of lightweight materials and thin Kraft paper where torque multiplication is unnecessary.</li>
         <li><strong>Reverse Gear:</strong> Designed to output torque greater than the 3rd forward gear, which is critical for executing custom "half-cuts," safely ripping out wedged cardboard to clear severe jams, and performing routine maintenance without dismantling the unit.</li>
       </ul>
+      <br>
+      <div class="highlight-box">
+        <h3>Key Contribution</h3>
+        <p>Designed the mechanical gearbox and output rollers, and calculated the required power and gear ratios needed to easily crush thick cardboard.</p>
+      </div>
     </section>
   </main>
 

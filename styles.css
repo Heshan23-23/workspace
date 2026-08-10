@@ -123,13 +123,32 @@ html,body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',
   outline:2px solid rgba(255,255,255,.9);
   outline-offset:4px;
 }
+.highlight-box{
+  margin:24px 0 16px;
+  padding:18px 20px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(124,92,255,0.18),rgba(59,180,255,0.12));
+  border:1px solid rgba(255,255,255,0.14);
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+}
+.highlight-box h3{
+  margin:0 0 8px;
+  color:#fff;
+  font-size:1.05rem;
+  letter-spacing:.02em;
+}
+.highlight-box p{
+  margin:0;
+  color:#e8f1ff;
+  line-height:1.7;
+}
 @keyframes pop-in{
   0%{opacity:0;transform:translateY(14px) scale(.95)}
   100%{opacity:1;transform:none}
 }
 
 .contact-panel{text-align:center}
-footer{padding:20px;text-align:center;color:var(--muted)}
+footer{padding:12px 20px;text-align:center;color:var(--muted)}
 
 /* Reveal animation */
 .reveal{opacity:0;transform:translateY(16px) scale(.99);transition:opacity .6s ease,transform .6s ease}
